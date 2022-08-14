@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-// 封装了订单信心
+// 封装了订单信息
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

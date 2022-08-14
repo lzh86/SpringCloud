@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 public class PagedCouponTemplateInfo {
 
-    public List<com.geekbang.coupon.template.api.beans.CouponTemplateInfo> templates;
+    public List<CouponTemplateInfo> templates;
 
     public int page;
 

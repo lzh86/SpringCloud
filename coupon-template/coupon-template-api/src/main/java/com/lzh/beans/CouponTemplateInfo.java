@@ -1,6 +1,6 @@
 package com.lzh.beans;
 
-import com.geekbang.coupon.template.api.beans.rules.TemplateRule;
+import com.lzh.beans.rules.TemplateRule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
