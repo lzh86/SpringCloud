@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("calculator")
+@RequestMapping("/calculator")
 public class CouponCalculationController {
 
     @Autowired
@@ -33,5 +33,10 @@ public class CouponCalculationController {
     public SimulationResponse simulate(@RequestBody SimulationOrder simulator) {
         log.info("do simulation: {}", JSON.toJSONString(simulator));
         return calculationService.simulateOrder(simulator);
+    }
+
+    @PostMapping("/hello")
+    public String hello(){
+        return "hello";
     }
 }

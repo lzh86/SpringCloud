@@ -6,7 +6,7 @@ import com.lzh.beans.SimulationResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(value = "coupon-calculation-serv", path = "/calculator")
+@FeignClient(value = "coupon-calculation", path = "/calculator")
 public interface CalculationService {
 
     // 优惠券结算

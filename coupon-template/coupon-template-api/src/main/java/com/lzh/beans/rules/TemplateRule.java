@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * 优惠券计算规则
- * @author 姚半仙
  */
 @Data
 @NoArgsConstructor

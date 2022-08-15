@@ -7,12 +7,13 @@ server:
 spring:
   # 项目名称移到bootstrap.yml里了
   #  application:
-  #    name: coupon-template-serv
+  #    name: coupon-template
   datasource:
     # mysql数据源
     username: root
-    #    password:
-    url: jdbc:mysql://127.0.0.1:3306/geekbang_coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    password: root
+    #url: jdbc:mysql://127.0.0.1:3306/coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    url: jdbc:mysql://10.51.130.27:3306/coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 连接池
@@ -39,7 +40,7 @@ spring:
         # 可以配置多个，逗号分隔
         server-addr: localhost:8848
         # 默认就是application name，一般不用配置
-        service: coupon-template-serv
+        service: coupon-template
         # nacos客户端向服务端发送心跳的时间间隔，时间单位其实是ms
         heart-beat-interval: 5000
         # 服务端没有接受到客户端心跳请求就将其设为不健康的时间间隔，默认为15s
@@ -58,7 +59,7 @@ spring:
         # 命名空间ID，Nacos通过不同的命名空间来区分不同的环境，进行数据隔离，
         # 服务消费时只能消费到对应命名空间下的服务。
         # [注意]需要在nacos-server中创建好namespace，然后把id copy进来
-        namespace: dev
+        namespace: f1c10fae-2faf-4f38-acba-9e830ac5c20d
         # [注意]两个服务如果存在上下游调用关系，必须配置相同的group才能发起访问
         group: myGroup
         # 向注册中心注册服务，默认为true

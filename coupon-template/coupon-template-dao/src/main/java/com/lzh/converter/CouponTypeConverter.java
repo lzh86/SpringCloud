@@ -8,8 +8,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter
-public class CouponTypeConverter
-        implements AttributeConverter<CouponType, String> {
+public class CouponTypeConverter implements AttributeConverter<CouponType, String> {
 
     @Override
     public String convertToDatabaseColumn(CouponType couponCategory) {

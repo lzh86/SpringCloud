@@ -10,8 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CouponTemplateDao
-        extends JpaRepository<CouponTemplate, Long> {
+public interface CouponTemplateDao extends JpaRepository<CouponTemplate, Long> {
 
     // 根据Shop ID查询出所有券模板
     List<CouponTemplate> findAllByShopId(Long shopId);

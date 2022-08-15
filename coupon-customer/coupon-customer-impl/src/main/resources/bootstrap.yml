@@ -1,12 +1,13 @@
 spring:
   application:
-    name: coupon-template
+    name: coupon-customer
   cloud:
     nacos:
       config:
         server-addr: localhost:8848
-        file-extension: yml
+        file-extension: yaml
         # prefix: 文件名前缀，默认是spring.application.name
+        prefix: coupon-customer
         # 如果没有指定命令空间，则默认命令空间为PUBLIC
         namespace: dev
         # 如果没有配置Group，则默认值为DEFAULT_GROUP
@@ -22,9 +23,12 @@ spring:
         # 开启监听和自动刷新
         refresh-enabled: true
         # Nacos的扩展配置项，数字越大优先级越高
-        enable-remote-sync-config: true
-        extension-configs:
-          # 可以添加其他节点
-          - dataId: rabbitmq-config.yml
-            group: EXT_GROUP
-            refresh: true
+#        enable-remote-sync-config: true
+#        extension-configs:
+#          - dataId: coupon-config.yml
+#            group: EXT_GROUP
+#            refresh: true
+#          # 可以添加其他节点
+#          - dataId: rabbitmq-config.yml
+#            group: EXT_GROUP
+#            refresh: true

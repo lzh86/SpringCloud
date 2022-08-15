@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collection;
 import java.util.Map;
 
-@FeignClient(value = "coupon-template-serv", path = "/template",
+@FeignClient(value = "coupon-template", path = "/template",
 //        fallback = TemplateServiceFallback.class,
         fallbackFactory = TemplateServiceFallbackFactory.class)
 public interface TemplateService {

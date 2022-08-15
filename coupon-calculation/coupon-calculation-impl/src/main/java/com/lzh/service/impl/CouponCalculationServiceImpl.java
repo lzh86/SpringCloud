@@ -25,7 +25,7 @@ public class CouponCalculationServiceImpl implements CouponCalculationService {
     // 优惠券结算
     // 这里通过Factory类决定使用哪个底层Rule，底层规则对上层透明
     @Override
-    public ShoppingCart calculateOrderPrice(@RequestBody ShoppingCart cart) {
+    public ShoppingCart calculateOrderPrice(ShoppingCart cart) {
         log.info("calculate order price: {}", JSON.toJSONString(cart));
         RuleTemplate ruleTemplate = couponProcessorFactory.getTemplate(cart);
         return ruleTemplate.calculate(cart);
