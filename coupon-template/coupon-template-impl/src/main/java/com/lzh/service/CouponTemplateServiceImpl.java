@@ -127,7 +127,7 @@ public class CouponTemplateServiceImpl implements CouponTemplateService {
     @Override
     public CouponTemplateInfo loadTemplateInfo(Long id) {
         Optional<CouponTemplate> template = templateDao.findById(id);
-        return template.map(CouponTemplateConverter::convertToTemplateInfo).orElse(null);
+        return template.isPresent() ? CouponTemplateConverter.convertToTemplateInfo(template.get()) : null;
     }
 
     // 将券无效化

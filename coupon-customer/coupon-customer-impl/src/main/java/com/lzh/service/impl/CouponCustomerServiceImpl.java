@@ -34,10 +34,8 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
     @Autowired
     private CouponDao couponDao;
-
     @Autowired
     private WebClient.Builder webClientBuilder;
-
     @Autowired
     private TemplateService templateService;
     @Autowired

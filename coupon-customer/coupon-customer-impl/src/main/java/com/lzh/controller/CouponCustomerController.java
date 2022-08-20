@@ -26,12 +26,6 @@ public class CouponCustomerController {
     private CouponCustomerService customerService;
 
 
-    @PostMapping("/getConstant")
-    public String getConstant() {
-        log.info("disableCoupon:" + disableCoupon);
-       return disableCoupon.toString();
-    }
-
     @PostMapping("requestCoupon")
     public Coupon requestCoupon(@Valid @RequestBody RequestCoupon request) {
         if (disableCoupon) {
@@ -66,5 +60,21 @@ public class CouponCustomerController {
     public List<CouponInfo> findCoupon(@Valid @RequestBody SearchCoupon request) {
         return customerService.findCoupon(request);
     }
+
+    @PostMapping("/getConstant")
+    public String getConstant() {
+        log.info("disableCoupon:" + disableCoupon);
+        return disableCoupon.toString();
+    }
+
+
+    @PostMapping("/hello")
+    public String hello() {
+        log.info("hello:" + disableCoupon);
+        return disableCoupon.toString();
+    }
+
+
+
 
 }
