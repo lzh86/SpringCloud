@@ -12,12 +12,12 @@ spring:
     username: root
     password: root
     #url: jdbc:mysql://127.0.0.1:3306/coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-    url: jdbc:mysql://10.51.130.27:3306/coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    url: jdbc:mysql://10.51.130.80:3306/coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 连接池
     hikari:
-      pool-name: GeekbangCouponHikari
+      pool-name: CouponHikari
       connection-timeout: 5000
       idle-timeout: 30000
       maximum-pool-size: 10
@@ -32,6 +32,7 @@ spring:
     properties:
       hibernate.show_sql: true
       hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.MySQLDialect
     open-in-view: false
   cloud:
     nacos:
@@ -68,12 +69,14 @@ spring:
         watch:
           enabled: true
         watch-delay: 30000
+  main:
+    allow-bean-definition-overriding: true
 
 logging:
   level:
     com.broadview.coupon: debug
-    com.geekbang.coupon.customer.feign.TemplateService: debug
-    com.geekbang.coupon.customer.feign.CalculationService: debug
+    com.lzh.fegin.CalculationService: debug
+    com.lzh.fegin.TemplateService: debug
 
 feign:
   client:
@@ -84,6 +87,7 @@ feign:
       coupon-template:
         connectTimeout: 1000
         readTimeout: 1500
+  #hystrix: true
   circuitbreaker:
     enabled: true
 

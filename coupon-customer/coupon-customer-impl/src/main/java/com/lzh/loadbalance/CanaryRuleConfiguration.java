@@ -11,9 +11,8 @@ import org.springframework.core.env.Environment;
 public class CanaryRuleConfiguration {
 
     @Bean
-    public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(
-            Environment environment,
-            LoadBalancerClientFactory loadBalancerClientFactory) {
+    public ReactorLoadBalancer<ServiceInstance> reactorServiceInstanceLoadBalancer(Environment environment,
+                                                                                   LoadBalancerClientFactory loadBalancerClientFactory) {
         String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
         return new CanaryRule(loadBalancerClientFactory.getLazyProvider(name,
                 ServiceInstanceListSupplier.class), name);

@@ -3,10 +3,11 @@ package com.lzh.fegin;
 import com.lzh.beans.ShoppingCart;
 import com.lzh.beans.SimulationOrder;
 import com.lzh.beans.SimulationResponse;
+import com.lzh.fegin.fallback.CalculationServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(value = "coupon-calculation", path = "/calculator")
+@FeignClient(value = "coupon-calculation", path = "/calculator",fallback = CalculationServiceFallback.class)
 public interface CalculationService {
 
     // 优惠券结算

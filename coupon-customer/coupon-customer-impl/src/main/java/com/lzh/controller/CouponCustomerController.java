@@ -4,6 +4,7 @@ package com.lzh.controller;
 import com.lzh.beans.*;
 import com.lzh.entity.Coupon;
 import com.lzh.service.CouponCustomerService;
+import com.lzh.service.HelloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,8 @@ public class CouponCustomerController {
 
     @Autowired
     private CouponCustomerService customerService;
+    @Autowired
+    private HelloService helloService;
 
 
     @PostMapping("requestCoupon")
@@ -68,13 +71,16 @@ public class CouponCustomerController {
     }
 
 
-    @PostMapping("/hello")
+    @GetMapping("/feginHello")
     public String hello() {
-        log.info("hello:" + disableCoupon);
-        return disableCoupon.toString();
+        log.info("feginHello:" + disableCoupon);
+        return helloService.feginHello();
     }
 
-
-
+    @GetMapping("/httpHello")
+    public String httpHello() {
+        log.info("httpHello:" + disableCoupon);
+        return helloService.httpHello();
+    }
 
 }

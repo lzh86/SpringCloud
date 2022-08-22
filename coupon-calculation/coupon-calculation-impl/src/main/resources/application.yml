@@ -1,8 +1,8 @@
 # 项目的启动端口
 server:
   port: 20001
-  servlet:
-    context-path: /coupon-calculation
+#  servlet:
+#    context-path: /coupon-calculation
 
 spring:
 #  项目名称移到bootstrap.yml
@@ -13,7 +13,7 @@ spring:
     nacos:
       discovery:
         # 可以配置多个，逗号分隔
-        server-addr: localhost:8848
+        server-addr: 10.51.130.155:8848
         # 默认就是application name，一般不用配置
         service: coupon-calculation
         # nacos客户端向服务端发送心跳的时间间隔，时间单位其实是ms

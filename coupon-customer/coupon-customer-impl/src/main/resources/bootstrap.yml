@@ -5,7 +5,6 @@ spring:
     nacos:
       config:
         server-addr: localhost:8848
-
         file-extension: yaml
         # prefix: 文件名前缀，默认是spring.application.name
         prefix: coupon-customer

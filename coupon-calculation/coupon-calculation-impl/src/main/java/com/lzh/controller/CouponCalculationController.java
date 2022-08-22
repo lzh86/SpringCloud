@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 @RestController
 @RequestMapping("/calculator")
@@ -35,8 +37,23 @@ public class CouponCalculationController {
         return calculationService.simulateOrder(simulator);
     }
 
-    @PostMapping("/hello")
-    public String hello(){
-        return "hello";
+    /**
+     * 模拟http请求
+     * @return
+     */
+    @GetMapping("/httpHello")
+    public String httpHello() {
+        log.info("http 请求: {}", LocalDateTime.now());
+        return "httpHello";
+    }
+
+    /**
+     * 模拟fegin请求
+     * @return
+     */
+    @GetMapping("/feginHello")
+    public String feginHello() {
+        log.info("fegin 请求: {}", LocalDateTime.now());
+        return "feginHello";
     }
 }
