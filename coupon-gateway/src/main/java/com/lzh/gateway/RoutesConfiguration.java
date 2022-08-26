@@ -1,4 +1,4 @@
-package com;
+package com.lzh.gateway;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +36,7 @@ public class RoutesConfiguration {
                             }
                             )
                         )
-                        .uri("lb://coupon-customer-serv")
+                        .uri("lb://coupon-customer")
                 ).route(route -> route
                         // 如果一个请求命中了多个路由，order越小的路由优先级越高
                         .order(1)
@@ -49,11 +49,11 @@ public class RoutesConfiguration {
                                 }
                                 )
                         )
-                        .uri("lb://coupon-template-serv")
+                        .uri("lb://coupon-template")
                 ).route(route -> route
                         .path("/gateway/calculator/**")
                         .filters(f -> f.stripPrefix(1))
-                        .uri("lb://coupon-calculation-serv")
+                        .uri("lb://coupon-calculation")
 //                )
 //                .route("id-001", route -> route
 //                        // 在指定时间之前

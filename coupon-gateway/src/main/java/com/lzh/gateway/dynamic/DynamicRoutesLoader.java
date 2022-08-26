@@ -1,4 +1,4 @@
-package com.lzh;
+package com.lzh.gateway.dynamic;
 
 import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.cloud.nacos.NacosConfigProperties;

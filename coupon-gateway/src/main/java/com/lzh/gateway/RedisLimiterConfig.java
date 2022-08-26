@@ -1,4 +1,4 @@
-package com;
+package com.lzh.gateway;
 
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.cloud.gateway.filter.ratelimit.RedisRateLimiter;

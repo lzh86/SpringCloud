@@ -1,4 +1,4 @@
-package com.lzh;
+package com.lzh.gateway.dynamic;
 
 
 import lombok.extern.slf4j.Slf4j;

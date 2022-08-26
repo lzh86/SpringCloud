@@ -1,4 +1,4 @@
-package com.lzh;
+package com.lzh.gateway.dynamic;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.nacos.api.config.listener.Listener;
