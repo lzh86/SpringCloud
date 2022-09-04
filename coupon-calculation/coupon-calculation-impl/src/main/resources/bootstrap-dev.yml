@@ -1,51 +1,43 @@
-# 项目的启动端口
-server:
-  port: 20000
-  error:
-    include-message: always
-
 spring:
-  # 项目名称移到bootstrap.yml里了
-  #  application:
-  #    name: coupon-template
-  datasource:
-    # mysql数据源
-    username: root
-    password: root
-    #url: jdbc:mysql://127.0.0.1:3306/coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-    url: jdbc:mysql://10.51.130.80:3306/coupon_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    # 连接池
-    hikari:
-      pool-name: GeekbangCouponHikari
-      connection-timeout: 5000
-      idle-timeout: 30000
-      maximum-pool-size: 10
-      minimum-idle: 5
-      max-lifetime: 60000
-      auto-commit: true
-  jpa:
-    show-sql: true
-    hibernate:
-      # 在生产环境全部为none，防止ddl结构被自动执行
-      ddl-auto: none
-    properties:
-      hibernate.format_sql: true
-      hibernate.show_sql: true
-    open-in-view: false
+  application:
+    name: coupon-calculation
   cloud:
     nacos:
+      config:
+        server-addr: 10.51.130.155:8848
+        file-extension: yaml
+        # prefix: 文件名前缀，默认是spring.application.name
+        # 如果没有指定命令空间，则默认命令空间为PUBLIC
+        namespace: f1c10fae-2faf-4f38-acba-9e830ac5c20d
+        # 如果没有配置Group，则默认值为DEFAULT_GROUP
+        group: DEFAULT_GROUP
+        # 从Nacos读取配置项的超时时间
+        timeout: 5000
+        # 长轮训超时时间
+        config-long-poll-timeout: 1000
+        # 重试时间
+        config-retry-time: 100000
+        # 长轮训重试次数
+        max-retry: 3
+        # 开启监听和自动刷新
+        refresh-enabled: true
+        # Nacos的扩展配置项，数字越大优先级越高
+        enable-remote-sync-config: true
+        extension-configs:
+          # 可以添加其他节点
+          - dataId: rabbitmq-config.yml
+            group: EXT_GROUP
+            refresh: true
       discovery:
         # 可以配置多个，逗号分隔
-        server-addr: localhost:8848
+        server-addr: 10.51.130.155:8848
         # 默认就是application name，一般不用配置
-        service: coupon-template
+        service: coupon-calculation
         # nacos客户端向服务端发送心跳的时间间隔，时间单位其实是ms
         heart-beat-interval: 5000
         # 服务端没有接受到客户端心跳请求就将其设为不健康的时间间隔，默认为15s
         # 注：推荐值该值为15s即可，如果有的业务线希望服务下线或者出故障时希望尽快被发现，可以适当减少该值
-        heart-beat-timeout: 15000
+        heart-beat-timeout: 20000
         # [注意] 这个IP地址如果更换网络后变化，会导致服务调用失败，建议先不要设置
         # ip: 172.20.7.228
         # 元数据部分 - 可以自己随便定制
@@ -69,7 +61,45 @@ spring:
         watch:
           enabled: true
         watch-delay: 30000
+    sentinel:
+      transport:
+        # sentinel api端口，默认8719
+        port: 8719
+        # dashboard地址
+        dashboard: localhost:8080
+      datasource:
+        # 限流的规则key是flow
+        geekbang-flow:
+          nacos:
+            server-addr: localhost:8848
+            namespace: f1c10fae-2faf-4f38-acba-9e830ac5c20d
+            groupId: SENTINEL_GROUP
+            dataId: ${spring.application.name}-flow-rules
+            rule-type: flow
+
+# 项目的启动端口
+server:
+  port: 20001
+#  servlet:
+#    context-path: /coupon-calculation
+
+
+redis:
+  database: 0
+  host: localhost
+  port: 6379
+  # password:
+  # 连接超时时间
+  timeout: 10000
 
 logging:
   level:
     com.broadview.coupon: debug
+
+# 开启所有management端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

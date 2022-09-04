@@ -1,14 +1,18 @@
-server:
-  port: 30000
-  error:
-    include-message: always
-
 spring:
-  redis:
-    host: localhost
-    port: 6379
+  application:
+    name: coupon-gateway
   cloud:
     nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+        namespace: f1c10fae-2faf-4f38-acba-9e830ac5c20d
+        timeout: 5000
+        config-long-poll-timeout: 1000
+        config-retry-time: 100000
+        max-retry: 3
+        refresh-enabled: true
+        enable-remote-sync-config: true
       discovery:
         server-addr: localhost:8848
         heart-beat-interval: 5000
@@ -25,13 +29,13 @@ spring:
         locator:
           lower-case-service-id: true
           enabled: true
-#      routes:
-#        - id: id-0012
-#          uri: lb://coupon-customer-serv
-#          predicates:
-#            - Path=/whatever/**
-#          filters:
-#            - StripPrefix=1
+      #      routes:
+      #        - id: id-0012
+      #          uri: lb://coupon-customer-serv
+      #          predicates:
+      #            - Path=/whatever/**
+      #          filters:
+      #            - StripPrefix=1
       globalcors:
         cors-configurations:
           '[/**]':
@@ -44,12 +48,13 @@ spring:
             allowed-methods: "*"
             allow-credentials: true
             allowed-headers: "*"
-#        add-to-simple-url-handler-mapping: true
+  redis:
+    host: localhost
+    port: 6379
   sleuth:
     sampler:
       probability: 1
       rate: 1000
-
 
 management:
   endpoints:
@@ -57,6 +62,9 @@ management:
       exposure:
         include: "*"
 
-
+server:
+  port: 30000
+  error:
+    include-message: always
 #logging:
 #  level: debug

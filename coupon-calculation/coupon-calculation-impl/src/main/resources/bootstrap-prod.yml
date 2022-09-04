@@ -1,16 +1,33 @@
-# 项目的启动端口
-server:
-  port: 20001
-#  servlet:
-#    context-path: /coupon-calculation
-
 spring:
-#  项目名称移到bootstrap.yml
-#  application:
-#    # 定义项目名称
-#    name: coupon-calculation
+  application:
+    name: coupon-calculation
   cloud:
     nacos:
+      config:
+        server-addr: 10.51.130.155:8848
+        file-extension: yaml
+        # prefix: 文件名前缀，默认是spring.application.name
+        # 如果没有指定命令空间，则默认命令空间为PUBLIC
+        namespace: cb069004-3f8d-4314-ad4f-18b860049a1f
+        # 如果没有配置Group，则默认值为DEFAULT_GROUP
+        group: DEFAULT_GROUP
+        # 从Nacos读取配置项的超时时间
+        timeout: 5000
+        # 长轮训超时时间
+        config-long-poll-timeout: 1000
+        # 重试时间
+        config-retry-time: 100000
+        # 长轮训重试次数
+        max-retry: 3
+        # 开启监听和自动刷新
+        refresh-enabled: true
+        # Nacos的扩展配置项，数字越大优先级越高
+        enable-remote-sync-config: true
+        extension-configs:
+          # 可以添加其他节点
+          - dataId: rabbitmq-config.yml
+            group: EXT_GROUP
+            refresh: true
       discovery:
         # 可以配置多个，逗号分隔
         server-addr: 10.51.130.155:8848
@@ -34,7 +51,7 @@ spring:
         # 命名空间ID，Nacos通过不同的命名空间来区分不同的环境，进行数据隔离，
         # 服务消费时只能消费到对应命名空间下的服务。
         # [注意]需要在nacos-server中创建好namespace，然后把id copy进来
-        namespace: f1c10fae-2faf-4f38-acba-9e830ac5c20d
+        namespace: cb069004-3f8d-4314-ad4f-18b860049a1f
         # [注意]两个服务如果存在上下游调用关系，必须配置相同的group才能发起访问
         group: myGroup
         # 向注册中心注册服务，默认为true
@@ -55,17 +72,25 @@ spring:
         geekbang-flow:
           nacos:
             server-addr: localhost:8848
-            namespace: f1c10fae-2faf-4f38-acba-9e830ac5c20d
+            namespace: cb069004-3f8d-4314-ad4f-18b860049a1f
             groupId: SENTINEL_GROUP
             dataId: ${spring.application.name}-flow-rules
             rule-type: flow
-#  redis:
-#    database: 0
-#    host: localhost
-#    port: 6379
-#    # password:
-#    # 连接超时时间
-#    timeout: 10000
+
+# 项目的启动端口
+server:
+  port: 20001
+#  servlet:
+#    context-path: /coupon-calculation
+
+
+redis:
+  database: 0
+  host: localhost
+  port: 6379
+  # password:
+  # 连接超时时间
+  timeout: 10000
 
 logging:
   level:
@@ -77,4 +102,5 @@ management:
     web:
       exposure:
         include: "*"
+
 
